@@ -18,7 +18,7 @@ from .sensitivity_regression import SRCSensitivity
 from .sensitivity_sobol import SobolVariance
 from .sensitivity_rsa import RegionalSensitivity
 
-__version__ = "0.0.2"
+__version__ = "0.2"
 
 
 if __name__ == '__main__':

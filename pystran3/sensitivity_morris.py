@@ -439,7 +439,7 @@ class MorrisScreening(SensitivityAnalysis):
 
                         #compute distance
                         for k in range(z):
-                            New_Dist_Diff = New_Dist_Diff + (Dist_Diff[Traj_Vec[m, k],j])**2
+                            New_Dist_Diff = New_Dist_Diff + (Dist_Diff[int(Traj_Vec[m, k]),j])**2
 
                         # Check if the distance is greater than the old one
                         if New_Dist_Diff**0.5 > Max_New_Dist_Diff:
@@ -460,8 +460,8 @@ class MorrisScreening(SensitivityAnalysis):
         OptOutVec = np.zeros(((sizeb)*r,1))
 
         for k in range(r):
-            OptMatrix[k*(sizeb):k*(sizeb)+(sizeb),:]= New_OutMatrix[(sizeb)*(Opt_Traj_Vec[k]):(sizeb)*(Opt_Traj_Vec[k]) + sizeb,:]
-            OptOutVec[k*(sizeb):k*(sizeb)+(sizeb)]= New_OutFact[(sizeb)*(Opt_Traj_Vec[k]):(sizeb)*(Opt_Traj_Vec[k])+ sizeb,:]
+            OptMatrix[k*(sizeb):k*(sizeb)+(sizeb),:]= New_OutMatrix[(sizeb)*(int(Opt_Traj_Vec[k])):(sizeb)*(int(Opt_Traj_Vec[k])) + sizeb,:]
+            OptOutVec[k*(sizeb):k*(sizeb)+(sizeb)]= New_OutFact[(sizeb)*(int(Opt_Traj_Vec[k])):(sizeb)*(int(Opt_Traj_Vec[k]))+ sizeb,:]
 
         #----------------------------------------------------------------------
         # Compute values in the original intervals
@@ -677,7 +677,7 @@ class MorrisScreening(SensitivityAnalysis):
             sizea = NumFact
             sizeb=sizea+1
 
-        r = Sample.shape[0]/(sizea+1)
+        r = int(Sample.shape[0]/(sizea+1))
 
         try:
             NumOutp = Output.shape[1] #outputs combined in columns
@@ -691,6 +691,7 @@ class MorrisScreening(SensitivityAnalysis):
             OutMatrix=np.zeros((NumOutp*NumFact,3)) #for every output: every factor is a line, columns are mu*,mu and std
         else:
             OutMatrix=np.zeros((NumOutp*NumFact,1)) #for every output: every factor is a line, column is mu*
+
 
         SAmeas_out=np.zeros((NumOutp*NumFact,r))
 
